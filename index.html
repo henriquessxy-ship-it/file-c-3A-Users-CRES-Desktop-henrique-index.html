@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cinema 2030</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --accent: #dd1111;
+      --light: #ffffff;
+      --surface: rgba(255,255,255,0.08);
+      --surface-strong: rgba(255,255,255,0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(180deg, rgba(0,0,0,0.92), rgba(0,0,0,0.88)),
+        url('https://images.unsplash.com/photo-1535035596629-f2bd4f88a3f7?auto=format&fit=crop&w=1920&q=80') center/cover fixed no-repeat;
+      color: var(--light);
+      line-height: 1.5;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 20%),
+        radial-gradient(circle at bottom right, rgba(221,17,17,0.18), transparent 22%);
+      pointer-events: none;
+    }
+
+    header {
+      position: relative;
+      padding: 40px 24px 24px;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    header h1 {
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      letter-spacing: 0.12em;
+      margin-bottom: 12px;
+    }
+
+    header p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: #ddd;
+      font-size: 1rem;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      padding: 24px 20px 60px;
+    }
+
+    .movie-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .movie-card {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.55);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .movie-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(221,17,17,0.5);
+    }
+
+    .poster {
+      height: 340px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .poster::after {
+      content: 'PLAY TRAILER';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--light);
+      background: rgba(0,0,0,0.45);
+      opacity: 0;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: opacity 0.3s ease;
+    }
+
+    .movie-card:hover .poster::after {
+      opacity: 1;
+    }
+
+    .movie-info {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .movie-info h2 {
+      font-size: 1.35rem;
+      margin-bottom: 8px;
+    }
+
+    .movie-info p {
+      color: #ccc;
+      font-size: 0.95rem;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .tag,
+    .price,
+    .release {
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .tag {
+      background: rgba(221,17,17,0.18);
+      color: var(--light);
+      border: 1px solid rgba(221,17,17,0.35);
+    }
+
+    .price {
+      background: rgba(255,255,255,0.09);
+      color: #fff;
+    }
+
+    .release {
+      background: rgba(255,255,255,0.08);
+      color: #ddd;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #aaa;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 480px) {
+      header h1 { font-size: 2.4rem; }
+      .movie-info { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="badge">Lançamentos 2030</span>
+    <h1>Top Filmes em Pré-venda</h1>
+    <p>Os melhores lançamentos do cinema com estreia marcada para 21/05/2030. Veja os cartazes, o preço e o lançamento oficial.</p>
+  </header>
+
+  <main>
+    <div class="movie-grid">
+      <article class="movie-card">
+        <div class="poster" style="background-image:url('https://images.unsplash.com/photo-1497032205916-ac775f0649ae?auto=format&fit=crop&w=800&q=80')"></div>
+        <div class="movie-info">
+          <h2>Fúria no Escuro</h2>
+          <p>Um suspense eletrizante com ação intensa e um final inesperado.</p>
+          <div class="meta">
+            <span class="tag">Ação</span>
+            <span class="price">R$ 29,90</span>
+            <span class="release">Lançamento do dia 21/05/2030</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="movie-card">
+        <div class="poster" style="background-image:url('https://images.unsplash.com/photo-1517602302552-471fe67acf66?auto=format&fit=crop&w=800&q=80')"></div>
+        <div class="movie-info">
+          <h2>Amores Cinemáticos</h2>
+          <p>Uma comédia romântica moderna com humor, música e muita emoção.</p>
+          <div class="meta">
+            <span class="tag">Romance</span>
+            <span class="price">R$ 29,90</span>
+            <span class="release">Lançamento do dia 21/05/2030</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="movie-card">
+        <div class="poster" style="background-image:url('https://images.unsplash.com/photo-1505685296765-3a2736de412f?auto=format&fit=crop&w=800&q=80')"></div>
+        <div class="movie-info">
+          <h2>O Último Bilhete</h2>
+          <p>Drama emocionante sobre escolhas arriscadas e segredos revelados.</p>
+          <div class="meta">
+            <span class="tag">Drama</span>
+            <span class="price">R$ 29,90</span>
+            <span class="release">Lançamento do dia 21/05/2030</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="movie-card">
+        <div class="poster" style="background-image:url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=800&q=80')"></div>
+        <div class="movie-info">
+          <h2>Viagem Estelar</h2>
+          <p>Aventura espacial com efeitos visuais surpreendentes e heróis audaciosos.</p>
+          <div class="meta">
+            <span class="tag">Ficção</span>
+            <span class="price">R$ 29,90</span>
+            <span class="release">Lançamento do dia 21/05/2030</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="movie-card">
+        <div class="poster" style="background-image:url('https://images.unsplash.com/photo-1517601167477-1a4a3bfc64f7?auto=format&fit=crop&w=800&q=80')"></div>
+        <div class="movie-info">
+          <h2>Ritmo da Noite</h2>
+          <p>Musical vibrante com dança, luzes e uma trilha sonora inesquecível.</p>
+          <div class="meta">
+            <span class="tag">Musical</span>
+            <span class="price">R$ 29,90</span>
+            <span class="release">Lançamento do dia 21/05/2030</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="movie-card">
+        <div class="poster" style="background-image:url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80')"></div>
+        <div class="movie-info">
+          <h2>Sombras do Passado</h2>
+          <p>Terror psicológico que mistura mistério e sustos em uma história envolvente.</p>
+          <div class="meta">
+            <span class="tag">Terror</span>
+            <span class="price">R$ 29,90</span>
+            <span class="release">Lançamento do dia 21/05/2030</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>Todos os filmes têm estreia marcada para 21/05/2030 e preço especial de pré-venda.</p>
+  </footer>
+</body>
+</html>
